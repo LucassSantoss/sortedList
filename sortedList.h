@@ -31,6 +31,6 @@ int is_empty(t_sorted_list *sorted_list);
 
 int is_full(t_sorted_list *sorted_list);
 
-int find_index_to_insert(t_sorted_list *sorted_list, int number);
+int find_index(t_sorted_list *sorted_list, int number);
 
 #endif

@@ -7,16 +7,8 @@
 int append(t_sorted_list *sorted_list, int number) { // O(n) 
   if (sorted_list == NULL) return 0;
   if (sorted_list->n == sorted_list->max) realloc_list(sorted_list);
-  /*
-  int index = sorted_list->n;
-  for(int i = 0; i < sorted_list->n; i++){
-    if(number < sorted_list->items[i]){
-      index = i;
-      break;
-    }
-  }
-  */
-  int index = find_index_to_insert_sorted(sorted_list, number); //O(logn)
+  
+  int index = find_index(sorted_list, number); //O(logn)
   insert(sorted_list, number, index); // O(n)
   return 1;
 }
@@ -67,31 +59,14 @@ void realloc_list(t_sorted_list *sorted_list) {
 }
 
 int remove_item(t_sorted_list *sorted_list, int elem){ // O(n)
-  if (sorted_list->n == 0 || sorted_list == NULL){
-    return 0;
-  }
-  int left = 0;
-  int right = sorted_list->n - 1;
-  int mid;
+  if (sorted_list->n == 0 || sorted_list == NULL) return 0;  
+  int index = find_index(sorted_list, elem);
   
-  while (left <= right) {
-    mid = (left + right) / 2;
-    
-    if (sorted_list->items[mid] == elem) { 
-      for (int i = mid; i < sorted_list->n - 1; i++) {
-        sorted_list->items[i] = sorted_list->items[i + 1];
-      }
-      sorted_list->n--;
-      return 1; 
-    }
-    else if (sorted_list->items[mid] < elem) {
-      left = mid + 1; 
-    }
-    else {
-      right = mid - 1; 
-    }
+  for(int i = index; i < sorted_list->n - 1; i ++){
+    sorted_list->items[index] = sorted_list->items[index + 1];
   }
-  
+  sorted_list->n--;
+
   return 0;  
 }
 
@@ -112,7 +87,7 @@ int is_full(t_sorted_list *sorted_list){
   return sorted_list-> n == sorted_list->max ? 1 : 0;
 }
 
-int find_index_to_insert(t_sorted_list *sorted_list, int number) {// O(logn)
+int find_index(t_sorted_list *sorted_list, int number) {// O(logn)
     int left = 0;
     int right = sorted_list->n - 1;
     int mid;
