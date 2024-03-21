@@ -12,6 +12,8 @@ int append(t_sorted_list *sorted_list, int number);
 
 t_sorted_list* create_list(int max, int is_ascending);
 
+int remove_item(t_sorted_list * sorted_list, int elem);
+
 t_sorted_list *reverse_order(t_sorted_list *sorted_list);
 
 void realloc_list(t_sorted_list *sorted_list);
