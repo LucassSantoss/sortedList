@@ -5,11 +5,14 @@ typedef struct {
     int n;
     int max;
     int *items;
+    int is_ascending;
 } t_sorted_list;
 
 int append(t_sorted_list *sorted_list, int number);
 
-t_sorted_list* create_list(int max);
+t_sorted_list* create_list(int max, int is_ascending);
+
+t_sorted_list *reverse_order(t_sorted_list *sorted_list);
 
 void realloc_list(t_sorted_list *sorted_list);
 
